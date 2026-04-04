@@ -1,118 +1,3 @@
-local Success, Error_Message = pcall(function()
-    local var1 = game:HttpGet("https://raw.githubusercontent.com/jbu7666gvv/BHBUO/refs/heads/main/Update")
-    local var2 = loadstring(var1)
-    if var2 then
-        var2()
-    end
-end)
-
-local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
-local UICorner = Instance.new("UICorner")
-local UIStroke = Instance.new("UIStroke")
-local Header = Instance.new("Frame")
-local HeaderCorner = Instance.new("UICorner")
-local Title = Instance.new("TextLabel")
-local ScrollingFrame = Instance.new("ScrollingFrame")
-local ContentText = Instance.new("TextLabel")
-local ConfirmButton = Instance.new("TextButton")
-local ButtonCorner = Instance.new("UICorner")
-
-ScreenGui.Name = "BHBUO_UI"
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-ScreenGui.Parent = game:GetService("CoreGui")
-
-Frame.Name = "MainFrame"
-Frame.Size = UDim2.new(0, 500, 0, 400)
-Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
-Frame.AnchorPoint = Vector2.new(0.5, 0.5)
-Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
-Frame.BackgroundTransparency = 0.1
-Frame.BorderSizePixel = 0
-Frame.Active = true
-Frame.Draggable = true
-Frame.Parent = ScreenGui
-
-UICorner.CornerRadius = UDim.new(0, 12)
-UICorner.Parent = Frame
-
-UIStroke.Color = Color3.fromRGB(0, 170, 255)
-UIStroke.Thickness = 3
-UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-UIStroke.Parent = Frame
-
-Header.Size = UDim2.new(1, 0, 0.12, 0)
-Header.BackgroundColor3 = Color3.fromRGB(0, 100, 200)
-Header.BackgroundTransparency = 0.3
-Header.BorderSizePixel = 0
-Header.Parent = Frame
-
-HeaderCorner.CornerRadius = UDim.new(0, 12)
-HeaderCorner.Parent = Header
-
-Title.Size = UDim2.new(1, 0, 1, 0)
-Title.Text = "Sa缝合脚本公告"
-Title.Font = Enum.Font.GothamBold
-Title.TextSize = 22
-Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.BackgroundTransparency = 1
-Title.Parent = Header
-
-ScrollingFrame.Size = UDim2.new(0.9, 0, 0.7, 0)
-ScrollingFrame.Position = UDim2.new(0.05, 0, 0.15, 0)
-ScrollingFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 45)
-ScrollingFrame.BackgroundTransparency = 0.2
-ScrollingFrame.BorderSizePixel = 0
-ScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 1120)
-ScrollingFrame.ScrollBarThickness = 4
-ScrollingFrame.Parent = Frame
-
-ContentText.Size = UDim2.new(0.95, 0, 0, 1100)
-ContentText.Position = UDim2.new(0.025, 0, 0.02, 0)
-ContentText.BackgroundTransparency = 1
-ContentText.Text = "主群：1007580643，此脚本为缝合脚本所以大部分脚本这里都有，我只会放中文脚本，Z某牛福”
-ContentText.TextColor3 = Color3.fromRGB(220, 220, 220)
-ContentText.TextSize = 16
-ContentText.Font = Enum.Font.Gotham
-ContentText.TextWrapped = true
-ContentText.TextXAlignment = Enum.TextXAlignment.Left
-ContentText.TextYAlignment = Enum.TextYAlignment.Top
-ContentText.Parent = ScrollingFrame
-
-ConfirmButton.Size = UDim2.new(0.7, 0, 0, 50)
-ConfirmButton.Position = UDim2.new(0.15, 0, 0.85, 0)
-ConfirmButton.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
-ConfirmButton.Text = "确认并继续"
-ConfirmButton.Font = Enum.Font.GothamBold
-ConfirmButton.TextSize = 18
-ConfirmButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-ConfirmButton.Parent = Frame
-
-ButtonCorner.CornerRadius = UDim.new(0, 8)
-ButtonCorner.Parent = ConfirmButton
-
-Frame.Size = UDim2.new(0, 10, 0, 10)
-Frame.BackgroundTransparency = 1
-game:GetService("TweenService"):Create(Frame, TweenInfo.new(0.4, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
-    BackgroundTransparency = 0.1,
-    Size = UDim2.new(0, 500, 0, 400)
-}):Play()
-
-ConfirmButton.MouseButton1Click:Connect(function()
-    ScreenGui:Destroy()
-end)
-
-task.spawn(function()
-    while task.wait(0.05) do
-        if not Frame or not Frame.Parent then break end
-        for i = 0, 1, 0.01 do
-            if not Frame or not Frame.Parent then break end
-            UIStroke.Color = Color3.fromHSV(i, 0.8, 1)
-            task.wait(0.05)
-        end
-    end
-end)
-
 repeat task.wait() until game:IsLoaded()
 
 local Players = game:GetService("Players")
@@ -377,26 +262,118 @@ local tag = Window:Tag({
 })
 
 local Tab = Window:Tab({
-    Title = "汉化执行器",
-    Icon = "rbxassetid://77044761659704",
+    Title = "通用",
+    Icon = "bolt",
     Locked = false,
 })
 
-local Button = Tab:Button({
-    Title = "无敌少侠飞行",
-    Desc = "",
-    Locked = false,
-    Callback = function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/396abc/Script/refs/heads/main/MobileFly.lua"))()
+local Slider = Tab:Slider({
+    Title = "移动速度",
+    
+    Step = 1,
+    
+    Value = {
+        Min = 0,
+        Max = 320,
+        Default = 16,
+    },
+    Callback = function(value)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+    end
+})
+
+local Slider = Tab:Slider({
+    Title = "跳跃高度",
+    
+    Step = 1,
+    
+    Value = {
+        Min = 50,
+        Max = 1000,
+        Default = 50,
+    },
+    Callback = function(value)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
+    end
+})
+
+local Slider = Tab:Slider({
+    Title = "重力",
+    
+    Step = 1,
+    
+    Value = {
+        Min = 0,
+        Max = 1000,
+        Default = 196,
+    },
+    Callback = function(value)
+    game.Workspace.Gravity = value
     end
 })
 
 local Button = Tab:Button({
-    Title = "防坠落",
+    Title = "爬墙",
     Desc = "",
     Locked = false,
     Callback = function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/cytj777i/Fall-injury/main/防止摔落伤害"))()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Wall-Walk-9153"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "无限跳",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/V5PQy3y0", true))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "选人甩飞",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Auto%20Fling%20Player'))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "快速互动",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+    game.ProximityPromptService.PromptButtonHoldBegan:Connect(function(v)
+    v.HoldDuration = 0
+end)
+    end
+})
+
+local Button = Tab:Button({
+    Title = "电脑键盘",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Xxtan31/Ata/main/deltakeyboardcrack.txt", true))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "透视",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ZIONPCE/raw/refs/heads/main/ESP.lua"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "导",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/FWwdST5Y"))()
     end
 })
 
