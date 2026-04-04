@@ -113,8 +113,6 @@ task.spawn(function()
     end
 end)
 
-》
-
 repeat task.wait() until game:IsLoaded()
 
 local Players = game:GetService("Players")
