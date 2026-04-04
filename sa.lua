@@ -377,6 +377,12 @@ local Button = Tab:Button({
     end
 })
 
+ocal Tab = Window:Tab({
+    Title = "翻译",
+    Icon = "bolt",
+    Locked = false,
+}
+
 local Button = Tab:Button({
     Title = "翻译",
     Desc = "",
