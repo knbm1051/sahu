@@ -340,6 +340,15 @@ local Button = Tab:Button({
 })
 
 local Button = Tab:Button({
+    Title = "飞行V3",
+    Desc = "",
+    Locked = false,
+    Callback = function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/CNHM/asg/refs/heads/main/fly.lua"))()
+    end
+})
+
+local Button = Tab:Button({
     Title = "快速互动",
     Desc = "",
     Locked = false,
